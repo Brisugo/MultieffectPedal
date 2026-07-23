@@ -1,0 +1,41 @@
+@startuml
+
+circle main
+class Audio{
+    +init()
+    +begin()
+    +get()
+    +put()
+
+    +callback()
+
+    -timer
+}
+
+class EffectChain{
+    +begin()
+    +process()
+
+    -effectList
+}
+
+class SerialInterface{
+    +begin()
+    +update()
+}
+
+class AudioEffect{
+    +process()
+}
+class Chorus extends AudioEffect
+class Delay extends AudioEffect
+class Distortion extends AudioEffect
+
+
+main -> Audio : starts
+main -> SerialInterface : calls
+
+Audio --> EffectChain : calls
+AudioEffect -> EffectChain
+
+@enduml
