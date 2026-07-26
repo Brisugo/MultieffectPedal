@@ -1,0 +1,25 @@
+@startuml
+
+class EffectInterface {
+    +processEffects()
+}
+
+class Effect {
+    +process(float) : float
+    +getName() : char[]
+
+    +name : char[]
+    +id : int
+}
+class Parameter {}
+
+class Chorus extends Effect {}
+class Distortion extends Effect {}
+class Flanger extends Effect {}
+class Limiter extends Effect {}
+
+EffectInterface <-- Effect
+
+Effect <- Parameter
+
+@enduml

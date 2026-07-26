@@ -1,0 +1,10 @@
+@startuml
+SerialInterface ..> LedInterface
+SerialInterface ..> ButtonInterface
+SerialInterface ..> EffectInterface
+LedInterface ..> EffectInterface
+LedInterface ..> AudioInterface
+ButtonInterface ..> EffectInterface
+ButtonInterface ..> LedInterface
+EffectInterface ..> AudioInterface
+@enduml

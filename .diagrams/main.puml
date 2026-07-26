@@ -1,0 +1,100 @@
+@startuml
+
+class main{
+    +setup()
+    +loop()
+}
+
+class RoutineHandler {
+    +begin()
+
+    +start()
+    +process()
+}
+
+class AnalogRoutine {
+    +processInput()
+    +processOutput()
+
+    +getInput() : uint16_t
+    +setOutput(uint16_t)
+
+    -input : uint16_t
+    -output : uint16_t
+}
+
+class SerialRoutine {
+    +process()
+    +getBuffer() : char[]
+
+    -buffer : char[]
+}
+
+class LedRoutine {
+    +process()
+    +setLed(uint8_t, bool)
+
+    -matrix
+}
+
+'gestisce debounce
+class ButtonRoutine { 
+    +process()
+    +getButton(uint8_t) : bool
+
+    -state
+}
+
+class EffectRoutine {
+    +process()
+}
+
+class InterfaceHandler {
+
+}
+
+class AudioInterface {
+    +getInput() : float
+    +setOutput(float)
+}
+
+class SerialInterface {
+    +processLine()
+}
+
+class LedInterface {
+    +number()
+}
+
+class ButtonInterface {
+    +assoc(uint8_t btn, Effect)
+}
+
+class EffectInterface {
+    +processEffects()
+}
+
+main <-- RoutineHandler
+main <-- InterfaceHandler
+
+RoutineHandler <-- AnalogRoutine
+RoutineHandler <-- SerialRoutine
+RoutineHandler <-- LedRoutine
+RoutineHandler <-- ButtonRoutine
+RoutineHandler <-- EffectRoutine
+
+InterfaceHandler <-- AudioInterface
+InterfaceHandler <-- SerialInterface
+InterfaceHandler <-- LedInterface
+InterfaceHandler <-- ButtonInterface
+InterfaceHandler <-- EffectInterface
+
+' AnalogRoutine <. AudioInterface
+' SerialRoutine <.> SerialInterface
+' LedRoutine <. LedInterface
+' ButtonRoutine <. ButtonInterface
+' EffectRoutine <.> EffectInterface
+
+SerialInterface <-- Commands
+
+@enduml
