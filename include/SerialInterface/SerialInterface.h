@@ -51,14 +51,6 @@
 #include <stdlib.h>
 #include "./Utils.h"
 
-class Argument{
-public:
-    virtual Argument process(char **tokens, uint8_t count) = 0;
-private:
-    Argument *nextArg;
-};
-
-
 class SerialInterface
 {
 public:
@@ -461,24 +453,3 @@ private:
         }
     }
 };
-
-/*
- * ESEMPIO D'USO
- * ------------------------------------------------------------
- * EffectChain<8> chain;
- * SerialInterface<8> ui(chain);          // usa Serial di default
- *
- * void setup() {
- *   Serial.begin(115200);
- * }
- *
- * void loop() {
- *   ui.update();   // legge ed esegue i comandi in arrivo da Serial
- * }
- *
- * Per collegare un display Nextion su un'altra UART:
- *   SerialInterface<8> nextionUi(chain, Serial1);
- *   nextionUi.setCompactMode(true);
- *   // nel loop: nextionUi.update();
- * ------------------------------------------------------------
- */
